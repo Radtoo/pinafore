@@ -10,9 +10,7 @@ export async function doMediaUpload (realm, file) {
   try {
     const response = await uploadMedia(currentInstance, accessToken, file)
     const composeMedia = store.getComposeData(realm, 'media') || []
-    if (composeMedia.length === 4) {
-      throw new Error('Only 4 media max are allowed')
-    }
+
     await setCachedMediaFile(response.id, file)
     composeMedia.push({
       data: response,
